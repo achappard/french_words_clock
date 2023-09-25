@@ -1,6 +1,7 @@
 import '../scss/app.scss'
 import {build_letters_grid} from "./utils/letters-grid.js";
-import {display_time, get_message} from "./utils/display.js";
+import {get_words_highlighted} from "./utils/display.js";
+
 
 /**
  * Wrapper for the letter grid
@@ -17,5 +18,4 @@ build_letters_grid(grid_wrapper);
 // launch the setinterval
 // timer = setInterval(display_time, 1000);
 
-
-window.clock = get_message;
+timer = setInterval( () => grid_wrapper.dispatchEvent(new CustomEvent("words_to_hightlight", { detail: get_words_highlighted() })), 1000)
