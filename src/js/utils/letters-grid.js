@@ -59,10 +59,8 @@ const attachCustomEvent = (el) => {
             }
 
             if(word_to_turn_on.length){
-                console.log(word_to_turn_on);
                 let elems = new Set();
                 word_to_turn_on.forEach((value)=>{
-                    console.log(value);
                     const letters = document.querySelectorAll(`[data-word*="${value}"]`);
                     letters.forEach(item => elems.add(item))
                 })

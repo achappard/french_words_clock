@@ -1,8 +1,6 @@
 export const get_words_highlighted = () => {
-    const date = new Date(),
-        date_hour = date.getHours(),
-        date_min = date.getMinutes();
-    return get_message(date_hour, date_min);
+    const date = new Date();
+    return get_message(date.getHours(), date.getMinutes());
 }
 
 const hours_in_letters = {
