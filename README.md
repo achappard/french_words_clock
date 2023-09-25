@@ -1,6 +1,6 @@
 # French Words Clock
 
-![Nomadia](./public/word_clock.png)
+![Nomadia](./public/words_clock_french.gif)
 
 ## Dev server
 Start Vite dev server in the current directory.
