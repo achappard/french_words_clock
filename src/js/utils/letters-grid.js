@@ -37,12 +37,6 @@ const build_letters_grid = (wrapper_element) => {
             newLine.appendChild(newLetter);
         })
     })
-
-    const tab1 = ["il", "est", "une", "singularH", "dix_M"];
-    const tab2 = ["il", "est", "une", "singularH", "et_Q", "quart"];
-    const diff = difference(tab1, tab2);
-    console.log(diff);
-
 }
 
 const attachCustomEvent = (el) => {
@@ -51,13 +45,12 @@ const attachCustomEvent = (el) => {
             const words_to_turn_off = difference(current_hightlighted_words, e.detail);
             const word_to_turn_on = difference(e.detail, current_hightlighted_words);
             if(words_to_turn_off.length){
-                console.log(words_to_turn_off);
                 let elems = new Set();
                 words_to_turn_off.forEach((value)=>{
                     const letters = document.querySelectorAll(`[data-word*="${value}"]`);
                     letters.forEach(item => elems.add(item))
                 })
-                gsap.to([...elems], {opacity:.1, duration:.6, ease: "power1.Out",stagger: {
+                gsap.to([...elems], {opacity:.05, duration:.6, ease: "power1.Out",stagger: {
                         grid: 'auto',
                         from: "center",
                         amount: 1

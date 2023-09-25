@@ -1,5 +1,5 @@
-#app{text-align: center; padding: 2rem;}
-#grid-wrapper{
+//#app{text-align: center; padding: 2rem;}
+#app{
   font-family: 'B612 Mono', monospace;
   background-color: #111;
   display: inline-block;
@@ -7,6 +7,7 @@
   margin: 0 auto;
   padding: 1rem;
   user-select: none;
+  min-width: 981px;
   .letter-lines{
     text-align: center;
     .letter{
@@ -14,7 +15,7 @@
       padding: 2.2rem;
       font-size: 1.5rem;
       line-height: 1rem;
-      opacity: .1;
+      opacity: .05;
     }
   }
 }

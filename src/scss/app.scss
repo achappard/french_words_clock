@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=B612+Mono&display=swap');
-@import "00_global/variables";
-@import "00_global/my_bootstrap";
+@import "~normalize.css/normalize.css";
+@import url('https://fonts.googleapis.com/css2?family=B612+Mono&family=Dosis:wght@200&display=swap');
 @import "00_global/body";
-@import "00_global/grid-wrapper";
+@import "00_global/header";
+@import "00_global/app";
