@@ -1,4 +1,3 @@
-import '../scss/app.scss'
 import {build_letters_grid} from "./utils/letters-grid.js";
 import {get_words_highlighted} from "./utils/display.js";
 
