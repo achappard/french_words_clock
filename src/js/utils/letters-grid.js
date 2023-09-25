@@ -51,10 +51,11 @@ const attachCustomEvent = (el) => {
                     const letters = document.querySelectorAll(`[data-word*="${value}"]`);
                     letters.forEach(item => elems.add(item))
                 })
-                gsap.to([...elems], {opacity:.05, duration:.6, ease: "power1.Out",stagger: {
+                gsap.to([...elems], {opacity:.05, duration:.6,stagger: {
                         grid: 'auto',
                         from: "center",
-                        amount: 1
+                        amount: .5,
+                        ease: "power1.Out"
                     }});
             }
 
@@ -64,10 +65,11 @@ const attachCustomEvent = (el) => {
                     const letters = document.querySelectorAll(`[data-word*="${value}"]`);
                     letters.forEach(item => elems.add(item))
                 })
-                gsap.to([...elems], {opacity:1, duration:.6, ease: "power1.Out",stagger: {
+                gsap.to([...elems], {opacity:1, duration:.6,stagger: {
                         grid: 'auto',
                         from: "center",
-                        amount: 1
+                        amount: .5,
+                        ease: "power1.Out"
                     }});
             }
             current_hightlighted_words = e.detail;

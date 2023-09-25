@@ -15,4 +15,20 @@ const grid_wrapper = document.querySelector('#app');
  */
 build_letters_grid(grid_wrapper);
 
-setInterval( () => grid_wrapper.dispatchEvent(new CustomEvent("words_to_hightlight", { detail: get_words_highlighted() })), 1000)
+
+const launchInterval = () => {
+    return setInterval( () => grid_wrapper.dispatchEvent(new CustomEvent("words_to_hightlight", { detail: get_words_highlighted() })), 1000);
+}
+
+let run = launchInterval()
+
+
+window.addEventListener('focus', () => {
+    if(run === null){
+        run = launchInterval();
+    }
+})
+window.addEventListener('blur', () => {
+    clearInterval(run)
+    run = null;
+})
