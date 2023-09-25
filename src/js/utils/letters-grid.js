@@ -13,8 +13,8 @@ const letters_grid = [
     [{letter: "I", word:"il"}, {letter: "L", word:"il"}, {letter: "N", word:""}, {letter: "E", word:"est"}, {letter: "S", word:"est"}, {letter: "T", word:"est"}, {letter: "O", word:""}, {letter: "D", word:"deux"}, {letter: "E", word:"deux"}, {letter: "U", word:"deux"}, {letter: "X", word:"deux"}],
     [{letter: "Q", word:"quatre"}, {letter: "U", word:"quatre"}, {letter: "A", word:"quatre"}, {letter: "T", word:"quatre"}, {letter: "R", word:"quatre"}, {letter: "E", word:"quatre"}, {letter: "T", word:"trois"}, {letter: "R", word:"trois"}, {letter: "O", word:"trois"}, {letter: "I", word:"trois"}, {letter: "S", word:"trois"}],
     [{letter: "N", word:"neuf"}, {letter: "E", word:"neuf"}, {letter: "U", word:"neuf"}, {letter: "F", word:"neuf"}, {letter: "U", word:"une"}, {letter: "N", word:"une"}, {letter: "E", word:"une"}, {letter: "S", word:"sept"}, {letter: "E", word:"sept"}, {letter: "P", word:"sept"}, {letter: "T", word:"sept"}],
-    [{letter: "H", word:"huit"}, {letter: "U", word:"huit"}, {letter: "I", word:"huit"}, {letter: "T", word:"huit"}, {letter: "S", word:"six"}, {letter: "I", word:"six"}, {letter: "X", word:"six"}, {letter: "C", word:"cinq"}, {letter: "I", word:"cinq"}, {letter: "N", word:"cinq"}, {letter: "Q", word:"cinq"}],
-    [{letter: "M", word:"midi"}, {letter: "I", word:"midi"}, {letter: "D", word:"midi dix"}, {letter: "I", word:"midi dix"}, {letter: "X", word:"dix"}, {letter: "M", word:"minuit"}, {letter: "I", word:"minuit"}, {letter: "N", word:"minuit"}, {letter: "U", word:"minuit"}, {letter: "I", word:"minuit"}, {letter: "T", word:"minuit"}],
+    [{letter: "H", word:"huit"}, {letter: "U", word:"huit"}, {letter: "I", word:"huit"}, {letter: "T", word:"huit"}, {letter: "S", word:"six"}, {letter: "I", word:"six"}, {letter: "X", word:"six"}, {letter: "C", word:"cinq_H"}, {letter: "I", word:"cinq_H"}, {letter: "N", word:"cinq_H"}, {letter: "Q", word:"cinq_H"}],
+    [{letter: "M", word:"midi"}, {letter: "I", word:"midi"}, {letter: "D", word:"midi dix_H"}, {letter: "I", word:"midi dix_H"}, {letter: "X", word:"dix_H"}, {letter: "M", word:"minuit"}, {letter: "I", word:"minuit"}, {letter: "N", word:"minuit"}, {letter: "U", word:"minuit"}, {letter: "I", word:"minuit"}, {letter: "T", word:"minuit"}],
     [{letter: "O", word:"onze"}, {letter: "N", word:"onze"}, {letter: "Z", word:"onze"}, {letter: "E", word:"onze"}, {letter: "R", word:""}, {letter: "H", word:"singularH pluralH"}, {letter: "E", word:"singularH pluralH"}, {letter: "U", word:"singularH pluralH"}, {letter: "R", word:"singularH pluralH"}, {letter: "E", word:"singularH pluralH"}, {letter: "S", word:"pluralH"}],
     [{letter: "M", word:"moins"}, {letter: "O", word:"moins"}, {letter: "I", word:"moins"}, {letter: "N", word:"moins"}, {letter: "S", word:"moins"}, {letter: "O", word:""}, {letter: "L", word:"le"}, {letter: "E", word:"le"}, {letter: "D", word:"dix_M"}, {letter: "I", word:"dix_M"}, {letter: "X", word:"dix_M"}],
     [{letter: "E", word:"et_Q"}, {letter: "T", word:"et_Q"}, {letter: "R", word:""}, {letter: "Q", word:"quart"}, {letter: "U", word:"quart"}, {letter: "A", word:"quart"}, {letter: "R", word:"quart"}, {letter: "T", word:"quart"}, {letter: "P", word:""}, {letter: "M", word:""}, {letter: "D", word:""}],
@@ -42,6 +42,7 @@ const build_letters_grid = (wrapper_element) => {
 const attachCustomEvent = (el) => {
     el.addEventListener("words_to_hightlight", (e) => {
         if(!isEqual(e.detail, current_hightlighted_words)){
+
             const words_to_turn_off = difference(current_hightlighted_words, e.detail);
             const word_to_turn_on = difference(e.detail, current_hightlighted_words);
             if(words_to_turn_off.length){
@@ -58,8 +59,10 @@ const attachCustomEvent = (el) => {
             }
 
             if(word_to_turn_on.length){
+                console.log(word_to_turn_on);
                 let elems = new Set();
                 word_to_turn_on.forEach((value)=>{
+                    console.log(value);
                     const letters = document.querySelectorAll(`[data-word*="${value}"]`);
                     letters.forEach(item => elems.add(item))
                 })

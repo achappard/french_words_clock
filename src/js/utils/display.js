@@ -2,7 +2,7 @@ export const get_words_highlighted = () => {
     const date = new Date(),
         date_hour = date.getHours(),
         date_min = date.getMinutes();
-    return get_message(date_hour, date_min);
+    return get_message(10, 16);
 }
 
 const hours_in_letters = {
@@ -10,12 +10,12 @@ const hours_in_letters = {
     2: "deux",
     3: "trois",
     4: "quatre",
-    5: "cinq",
+    5: "cinq_H",
     6: "six",
     7: "sept",
     8: "huit",
     9: "neuf",
-    10: "dix",
+    10: "dix_H",
     11: "onze",
 }
 
