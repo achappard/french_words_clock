@@ -1,12 +1,12 @@
-import {create_new_element} from "./dom.js";
+// import {create_new_element} from "./dom.js";
 import gsap from "gsap";
 import {isEqual} from "lodash/lang.js";
 import {difference} from "lodash/array.js";
+import create_new_element from "./dom.js";
+let current_highlighted_words = [];
 
-// import _ from "lodash";
-let current_hightlighted_words = [];
 /**
- *
+ * Letters Grid definition
  * @type {([{letter: string, word: string},{letter: string, word: string},{letter: string, word: string},{letter: string, word: string},{letter: string, word: string},null,null,null,null,null,null]|[{letter: string, word: string},{letter: string, word: string},{letter: string, word: string},{letter: string, word: string},{letter: string, word: string},null,null,null,null,null,null]|[{letter: string, word: string},{letter: string, word: string},{letter: string, word: string},{letter: string, word: string},{letter: string, word: string},null,null,null,null,null,null]|[{letter: string, word: string},{letter: string, word: string},{letter: string, word: string},{letter: string, word: string},{letter: string, word: string},null,null,null,null,null,null]|[{letter: string, word: string},{letter: string, word: string},{letter: string, word: string},{letter: string, word: string},{letter: string, word: string},null,null,null,null,null,null])[]}
  */
 const letters_grid = [
@@ -22,8 +22,13 @@ const letters_grid = [
     [{letter: "E", word:"et_D"}, {letter: "T", word:"et_D"}, {letter: "S", word:""}, {letter: "D", word:"demie"}, {letter: "E", word:"demie"}, {letter: "M", word:"demie"}, {letter: "I", word:"demie"}, {letter: "E", word:"demie"}, {letter: "P", word:""}, {letter: "A", word:""}, {letter: "M", word:""}]
 ];
 
+/**
+ * Attach an event listener for update highlighted words
+ * Build the letter grid
+ * @param {Element} wrapper_element
+ */
 const build_letters_grid = (wrapper_element) => {
-    attachCustomEvent(wrapper_element);
+    wrapper_element.addEventListener("words_to_highlight", (e) =>  words_to_highlight_handler(e));
 
     letters_grid.forEach((letters_line) => {
         const newLine = create_new_element('div', ['letter-lines'])
@@ -39,42 +44,46 @@ const build_letters_grid = (wrapper_element) => {
     })
 }
 
-const attachCustomEvent = (el) => {
-    el.addEventListener("words_to_hightlight", (e) => {
-        if(!isEqual(e.detail, current_hightlighted_words)){
 
-            const words_to_turn_off = difference(current_hightlighted_words, e.detail);
-            const word_to_turn_on = difference(e.detail, current_hightlighted_words);
-            if(words_to_turn_off.length){
-                let elems = new Set();
-                words_to_turn_off.forEach((value)=>{
-                    const letters = document.querySelectorAll(`[data-word*="${value}"]`);
-                    letters.forEach(item => elems.add(item))
-                })
-                gsap.to([...elems], {opacity:.05, duration:.6,stagger: {
-                        grid: 'auto',
-                        from: "center",
-                        amount: .5,
-                        ease: "power1.Out"
-                    }});
-            }
-
-            if(word_to_turn_on.length){
-                let elems = new Set();
-                word_to_turn_on.forEach((value)=>{
-                    const letters = document.querySelectorAll(`[data-word*="${value}"]`);
-                    letters.forEach(item => elems.add(item))
-                })
-                gsap.to([...elems], {opacity:1, duration:.6,stagger: {
-                        grid: 'auto',
-                        from: "center",
-                        amount: .5,
-                        ease: "power1.Out"
-                    }});
-            }
-            current_hightlighted_words = e.detail;
+/**
+ * Event handler for the setInterval:
+ * If current_highlighted_words is different from e.detail,
+ * then we compare the two arrays to find out which words to make disappear and which to make appear.
+ * @param e
+ */
+const words_to_highlight_handler = (e) => {
+    if(!isEqual(e.detail, current_highlighted_words)){
+        const words_to_turn_off = difference(current_highlighted_words, e.detail);
+        const word_to_turn_on = difference(e.detail, current_highlighted_words);
+        if(words_to_turn_off.length){
+            let elems = new Set();
+            words_to_turn_off.forEach((value)=>{
+                const letters = document.querySelectorAll(`[data-word*="${value}"]`);
+                letters.forEach(item => elems.add(item))
+            })
+            gsap.to([...elems], {opacity:.05, duration:.6,stagger: {
+                    grid: 'auto',
+                    from: "center",
+                    amount: .5,
+                    ease: "power1.Out"
+                }});
         }
-    })
+
+        if(word_to_turn_on.length){
+            let elems = new Set();
+            word_to_turn_on.forEach((value)=>{
+                const letters = document.querySelectorAll(`[data-word*="${value}"]`);
+                letters.forEach(item => elems.add(item))
+            })
+            gsap.to([...elems], {opacity:1, duration:.6,stagger: {
+                    grid: 'auto',
+                    from: "center",
+                    amount: .5,
+                    ease: "power1.Out"
+                }});
+        }
+        current_highlighted_words = e.detail;
+    }
 }
 
 export {build_letters_grid};

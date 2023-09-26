@@ -1,8 +1,8 @@
 /**
- * Create a new Dom Element
+ * Create and return a new Dom Element
  * @param tagName
  * @param className
- * @returns {*}
+ * @returns {Element}
  */
 const create_new_element = (tagName, className=[]) => {
     const el = document.createElement(tagName);
@@ -11,4 +11,4 @@ const create_new_element = (tagName, className=[]) => {
     }
     return el;
 }
-export {create_new_element}
+export default create_new_element
